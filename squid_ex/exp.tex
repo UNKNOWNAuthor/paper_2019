@@ -1,0 +1,72 @@
+\section{Empirical Study}
+\label{sec:ex}
+We evaluated the performance of {\methodName} in comparison with the Rep-based anonymization (RA) and the Casting-based anonymization (CA) methods.
+
+Recall that the RA method first extracts a single representative deterministic instance, then apply the conventional graph anonymization method~\cite{Boldi_Injecting_2012} to produce the sanitized output. While, Casting-based method first heuristically cast the probability of every edge into a weight, then apply existing methodologies\cite{Das_Anonymizing_2010} on this weighted graph to generate sanitized output. 
+\input{squid_ex/setting.tex}
+\begin{figure*}[!htb]
+    \centering
+    \subfigure[PPI]{
+    \includegraphics[width=.31\textwidth]{expResult/ppi_time.pdf}
+    }
+    \subfigure[BK]{
+    \includegraphics[width=.31\textwidth]{expResult/bk_time.pdf}
+    }
+    \subfigure[DBLP]{
+    \includegraphics[width=.31\textwidth]{expResult/dblp_time.pdf}
+    }
+    \vspace{-5pt}
+    \caption{Time efficiency of different anonymization methods on three real graphs.}
+    \vspace{-5pt}
+    \label{fig:time}
+\end{figure*} 
+\begin{figure*}[t]
+    \centering
+    \subfigure[PPI]{
+    \includegraphics[width=.31\textwidth]{expResult/ppi_RD.pdf}
+    }
+    \subfigure[BK]{
+    \includegraphics[width=.31\textwidth]{expResult/bk_RD.pdf}
+    }
+    \subfigure[DBLP]{
+    \includegraphics[width=.31\textwidth]{expResult/dblp_RD.pdf}
+    }
+    \vspace{-5pt}
+    \caption{Reliability Discrepancy (RD) of sanitized output graphs of different anonymization methods against original graphs for various values of obfuscation parameter $k$. The smaller the discrepancy the more information of connectivity structure is preserved.}
+    \label{fig:rd}
+\end{figure*} 
+\begin{figure*}[!htb]
+    \centering
+    \subfigure[PPI]{
+    \includegraphics[width=.31\textwidth]{expResult/ppi_PathD.pdf}
+    }
+    \subfigure[BK]{
+    \includegraphics[width=.31\textwidth]{expResult/bk_PathD.pdf}
+    }
+    \subfigure[DBLP]{
+    \includegraphics[width=.31\textwidth]{expResult/dblp_PathD.pdf}
+    }
+    \vspace{-5pt}
+    \caption{Relative error of Shortest Path Distance (SPD) of sanitized output graphs of different anonymization methods against original graphs for various values of obfuscation parameter $k$.}
+    \label{fig:pathd}
+\end{figure*} 
+
+\input{squid_ex/exp_time.tex}
+\begin{figure*}[!htb]
+    \centering
+    \subfigure[PPI]{
+    \includegraphics[width=.31\textwidth]{expResult/ppi_dd.pdf}
+    }
+    \subfigure[BK]{
+    \includegraphics[width=.31\textwidth]{expResult/bk_dd.pdf}
+    }
+    \subfigure[DBLP]{
+    \includegraphics[width=.31\textwidth]{expResult/dblp_dd.pdf}
+    }
+    \vspace{-5pt}
+    \caption{Degree error of sanitized uncertain graphs of different anonymization methods on three real graphs for various values of obfuscation parameter $k$. The smaller the degree error the more information of degree distribution is preserved.}
+    \vspace{-5pt}
+    \label{fig:dd}
+\end{figure*} 
+\input{squid_ex/exp_gs.tex}
+\input{squid_ex/exp_apl.tex}

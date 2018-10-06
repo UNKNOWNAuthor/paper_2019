@@ -1,0 +1,30 @@
+\subsection{Application Results}
+\begin{figure}[!htb]
+    \centering
+    \subfigure[PPI]{
+    \includegraphics[height=3cm]{expResult/ppi_IM.pdf}
+    }
+    \subfigure[BK]{
+    \includegraphics[height=3cm]{expResult/bk_IM.pdf}
+    }
+    \caption{Results of the Degree Discount Influence Maximization algorithm on PPI, BK datasets, 
+    compared to sanitized graphs where $k$=100.}
+    \vspace{-10pt}
+    \label{fig:IM}
+\end{figure} 
+For a sanitized graph to be meaningful for research use, it should produce 
+the close results as the original graph in the application-level settings. 
+Influence Maximization is known as essential techniques with advertisement and public relation campaigns.
+It tries to locate users in the network who can most quickly spread influence through the network. 
+Usually, related algorithms start with identifying the nodes which can maximize influence and model the spread of influence through network how many users has ultimately reached.  
+Motivated by these facts, we compare the result of influence maximization on sanitized outputs and original graphs. 
+In general, it enables us to quantify the trade-off between application utility and privacy protection. 
+
+\textbf{Methodology.}~~Since there do not exist closed formula for the number of influenced nodes, we approximated the expectation value of influence by Monte Carlo Sampling. We create a number of random instance of the uncertain graph. For each sampled graph, we adopt the degree discount method (a heuristic-based method with light computation) to find the most influential nodes (seeds) on a deterministic graph. Starting from those seeds, we run the weighted cascade influence dissemination model to determine the number of reached users in the network. 
+
+For the limit of computation resource (memory overhead), we only perform the set of experiment over PPI and BK datasets. We report the expected number of reached nodes when the number of initial seeds in Figure~\ref{fig:IM}. 
+There are clear and visible trends across PPI and BK datasets. 
+Graphs with privacy protection diverge from the results of original graphs.
+We found that our method {\methodName} excelled in preserving the information propagation pattern, followed by CA that aim explicitly at preserving linear property. Similar to previous experiments, RA performs poorly due to the erroneous measurement of the impact on structural integrity from anonymization process.  
+
+Overall, our experimental assessment on influence maximization applications confirms our intuition: by incorporating the possible world semantics into the core of anonymization, one can achieve the same desired level of anonymity with a smaller impact in the uncertain graph utility.  

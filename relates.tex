@@ -1,0 +1,52 @@
+\section{Related Work}
+\label{sec:relatedWork}
+A significant amount of prior work has been done on protecting the privacy of network datasets.
+The comprehensive survey is out of the scope of this paper. 
+Here, we briefly summarize related work and clarify our privacy goal. 
+
+\textbf{Syntactic Privacy.}~~
+Early works on privacy-preserving network releasing focus on developing anonymization techniques.
+Many of them modify the graph structure in subtle ways that guarantee privacy but keep much of graph structure for release. 
+The released graph is available for all the analysis tasks. 
+These approaches usually provide privacy protection against specific de-anonymization attacks. 
+Most of them employ syntactic privacy models derived from $k$-anonymity~\cite{Sweeney:2002:KAM:774544.774552} which requires creating $k$ same entities ({\eg} neighborhoods, degree nodes) to blend victims. 
+
+Related anonymization methods can be classified into four main categories: (1) Clustering-based generalization~\cite{Hay_Anonymizing_2007,Bhagat_Class_2009,hay2010resisting}; (2)~{\em Edge modification}~\cite{Liu_Towards_2008, Zhou_Preserving_2008, Zou:2009, Wang2011, Wu_k_2010, Skarkala_Privacy_2012}; 
+(3)~{\em Edge randomization}~\cite{Liu_Privacy_2009,Ying_Randomizing_2008, Ninggal_Utility_2015};
+and~(4)~{\em Uncertainty semantic-based modifications} which add uncertainty to some edges and thus converting the deterministic graph to an uncertain version for anonymity~\cite{Boldi_Injecting_2012, Nguyen_Anonymizing_2015}. 
+
+In the first category, Hay {\etal}~\cite{Hay_Anonymizing_2007} proposed to generalize a network by clustering nodes and only publish the hyper-graph ($\#$ of nodes in each partition with $\#$ of edges within and across partitions). Campan {\etal}~\cite{Campan2008} studied the attributed graph case with a similar solution. 
+Cohen {\etal}~\cite{Cohen2013} presented a sequential clustering algorithm with better utility preserving. While, Cormode{\etal} \cite{Bhagat_Class_2009} payed attention to attributed-based matching attack. To this end, their method marks the mapping by clustering the nodes and corresponding real-world entities into groups. 
+
+In the second category, Liu {\etal}~\cite{Liu_Towards_2008} focused on resisting degree-based entity re-identification attacks. They propose to add and delete edges to pursue $k$-degree anonymity. Zhou {\etal}~\cite{Zhou_Preserving_2008} consider stronger re-identification attack based on radius-one sub-graph. Zhou~{\etal}~\cite{Zou:2009} assume that the adversary knows the compute graph. Their algorithms use edge addition and deletion to make graph $k$-Automorphism.  
+
+In the third category, Hay {\etal} \cite{Liu_Privacy_2009} study the use of random perturbation for identity obfuscation. They consider the basic degree-based re-identification of nodes. Besides, they propose to quantify the level of anonymity that is provided for the given node $v$ in the real network by the perturbed graph as the inverse of the maximum of the belief probability $Pr(v|u)$. Ying {\etal} \cite{Ying_Randomizing_2008} compare random perturbation methods to the method of $k-$degree anonymity. Their experiments show the deterministic edge modification methods for $k$-degree anonymity preserves the graph structure better than random perturbation methods.
+
+The uncertainty semantic-based approaches are known as the state-of-art ones because of their excellent privacy-utility trade-off, brought by the fine-grained perturbation leveraging the uncertain semantics. 
+% add two-sentences about the works 
+Our method belongs to the fourth category while in the wider context. 
+
+ 
+\textbf{Differential Privacy.}~~
+The dependence of adversary knowledge makes graph anonymization methods are vulnerable to attackers with strong background knowledge than assumed. Such fact has simulated the use of differential privacy for more rigorous privacy guarantees. 
+The recent research on applying differential privacy to graph data roughly falls into two directions. The first direction aims to release specific differentially private mining results, such as degree distributions, sub-graph counts, and frequent graph patterns~\cite{Xiao_Differentially_2014, Day:2016}. These methods only publish query result. However, there are many situations in which answering statistical queries simply does not achieve the purpose of sharing the graph.  
+The second direction aims to share the meaningful graph. Most research in this direction~\cite{Sala_Sharing_2011,Proserpio_2012} projects an input graph to dK-series and ensures differential privacy on dK-series statistics. Later, private statistics are then either fed into generators or MCMC process to generate a fit synthetic graphs. However, current techniques are still inadequate to provide desirable data utility for many graph mining tasks. Wang {\etal}~\cite{Wang_2013} propose to project a graph to the spectral domain and inject noise into the eigenvalues and eigen vector. This approach achieved significant improvement in efficiency, which, is still not able to obtain useful data utility. Xiao {\etal}~\cite{Xiao_Differentially_2014} present a solution based on structural inference over the hierarchical random graph model. This approach achieved the reasonable utility over real-life graph datasets. 
+
+As ever discussed, the state-of-art of graph privacy research has been limited to publishing data or analysis result of deterministic graphs. 
+The uncertain scenario is unexplored. 
+\subsection{Our Privacy Goal}
+In this paper, we try to move this line of research one step forward, from the deterministic context to a broader probabilistic context.
+This study focuses on generating a synthetic graph data from a real, probabilistic one under syntactic privacy guarantees. Such a synthetic graph enables scientist to draw meaningful insight while protecting the participants involved and the data collectors against risks of privacy violation. 
+
+Another critical component is the choice of privacy notation. 
+The concept of different privacy (DP) was proposed as a strong privacy measure such that sensitive information of individuals is kept private in data analysis and publishing process~\cite{Sala_Sharing_2011,Xiao_Differentially_2014}.
+Immune to various privacy attacks, DP and its off-springs offers a guarantee bound $\epsilon$ on the loss of privacy due to the data release. 
+While the data collector, such as e U.S. Census Bureau, has encountered many challenges in deploying differential privacy. These challenges includes, but not limited to, the difficulty in setting the value of the privacy-loss parameter, $\epsilon$ (epsilon), the lack of release mechanisms that align with the needs of data users, and the expectation on the part of data users that they will have access to micro-data~\cite{Simson:2018}. 
+Recall that the trade-off between between statistical
+accuracy and privacy loss is at the heart of privacy protection. 
+However, Differential privacy lacks a well-developed
+theory for measuring the relative impact of added noise on the utility of different data applications, tuning equity trade-offs, and presenting the impact of such decisions. 
+
+In contrast, the notion of syntactic privacy can be defined and understood based on the data schema. And, its parameters have a clear privacy meaning that can be understood independent of the actual data. Moreover, they have a clear relationship to the privacy regulation of individual identifiability (e.g., General Data Protection Regulation).
+Meanwhile, the specific utility measure can be incorporated into the privacy mechanism so that the usefulness is higher for the same privacy loss budget, allowing the overall privacy-loss budget to be better deployed.
+Hence, we focus on sharing uncertain graphs with syntactic anonymity. 
